@@ -11,4 +11,4 @@ def home(request):
 
 
 def about(request):
-    return render(request, "store/about.html")
+    return render(request, "store/about.html", {})
