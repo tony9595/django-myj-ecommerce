@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from store.models import Probuct
 
 # Create your views here.
 
 
 def home(request):
-    return render(request, "store/home.html", {})
-    # return HttpResponse("<h1>개발페이지</h1>")
+    products = Probuct.objects.all()
+    return render(request, "store/home.html", {"products": products})

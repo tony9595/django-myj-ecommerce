@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.humanize",  # dev_5 쉼표(,)를 추가하여 통화 형식(₩1,000,000)으로 변환하는 방법
     "store",  # dev_1
 ]
 
@@ -137,4 +138,4 @@ import os
 # dev_2
 # http://127.0.0.1:8000/media/파일경로
 MEDIA_URL = "media/"  # ex) /media/photo1.png
-MEDIA_ROOT = os.path.join(BASE_DIR, "medi")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
