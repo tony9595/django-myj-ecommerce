@@ -110,6 +110,10 @@ TIME_ZONE = "Asia/Seoul"
 
 USE_I18N = True
 
+# dev_5
+# Timezone의 사용여부를 정한다.
+# False면 모든 datetime들을 표시하고 True면 template과 form에만 적용된다.
+# 즉 DB에 저장되는 정보도 한국 시간대로 사용하려면 이 부분을 False로 지정해주어야 한다.
 USE_TZ = True
 
 
