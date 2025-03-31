@@ -8,3 +8,7 @@ from store.models import Probuct
 def home(request):
     products = Probuct.objects.all()
     return render(request, "store/home.html", {"products": products})
+
+
+def about(request):
+    return render(request, "store/about.html")
