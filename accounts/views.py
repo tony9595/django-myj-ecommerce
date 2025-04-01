@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import RegisterUserForm
+
 # Create your views here.
 
 
@@ -35,7 +36,20 @@ def register_user(request):
     form = RegisterUserForm()
 
     if request.method == "POST":
-        pass
+        if request.POST["password1"] == request.POST["password2"]:
+            form = RegisterUserForm(request.POST)
+
+            if form.is_valid():
+                form.save()
+
+                username = form.cleaned_data.get("username")
+                raw_password = form.cleaned_data.get("password1")
+
+                user = authenticate(username=username, password=raw_password)
+                login(request, user)
+                return redirect("/")
+
     else:
-        context = {"form" : form}
-        return render(request, "accounts/register.html", context)
+        form = RegisterUserForm()
+
+    return render(request, "accounts/register.html", {"form": form})
