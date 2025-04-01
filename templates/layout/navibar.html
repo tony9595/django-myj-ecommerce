@@ -28,6 +28,11 @@
                                     <a class="nav-link" href="{% url 'accounts:login_user' %}">Login</a>
                               {% endif %}
                         </li>
+                        <li class="nav-item">
+                              {% if not user.is_authenticated %}
+                                    <a class="nav-link" href="{% url 'accounts:register_user' %}">sign up</a>
+                              {% endif %}
+                        </li>
                         <li class="nav-item dropdown">
                               <a class="nav-link dropdown-toggle"
                                  id="navbarDropdown"

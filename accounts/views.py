@@ -19,7 +19,7 @@ def login_user(request):
             return redirect("/")
         else:
             messages.success(request, "로그인이 실패 하였습니다.")
-            return redirect("/accounts/login")
+            return redirect("accounts:login_user")
 
     else:
         return render(request, "accounts/login.html", {})
@@ -28,3 +28,25 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return redirect("/")
+
+
+def register_user(request):
+
+    form = RegisterUserForm()
+
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            messages.success(request, "로그인이 되었습니다.")
+            return redirect("/")
+        else:
+            messages.success(request, "로그인이 실패 하였습니다.")
+            return redirect("accounts:login_user")
+
+    else:
+        return render(request, "accounts/login.html", {})
