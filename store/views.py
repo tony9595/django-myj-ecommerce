@@ -12,3 +12,8 @@ def home(request):
 
 def about(request):
     return render(request, "store/about.html", {})
+
+
+def product(request, product_id):
+    product = Probuct.objects.get(id=product_id)
+    return render(request, "store/product.html", {"product": product})
