@@ -39,7 +39,7 @@
                                  href="#"
                                  role="button"
                                  data-bs-toggle="dropdown"
-                                 aria-expanded="false">Category</a>
+                                 aria-expanded="true">Category</a>
                               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li>
                                           <a class="dropdown-item" href="{% url 'store:category_summary' %}">All Categories</a>
@@ -47,12 +47,13 @@
                                     <li>
                                           <hr class="dropdown-divider" />
                                     </li>
-                                    <li>
-                                          <a class="dropdown-item" href="#!">Popular Items</a>
-                                    </li>
-                                    <li>
-                                          <a class="dropdown-item" href="#!">New Arrivals</a>
-                                    </li>
+                                    {% if categories %}
+                                          {% for category in categories %}
+                                                <li>
+                                                      <a class="dropdown-item" href="{% url 'store:category' category.id %}">{{ category.name }}</a>
+                                                </li>
+                                          {% endfor %}
+                                    {% endif %}
                               </ul>
                         </li>
                   </ul>
