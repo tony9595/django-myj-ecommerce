@@ -30,6 +30,4 @@ def add_cart(request):
         cart.add(product, product_qty)
 
         # Get Cart Quantity
-        cart_quantity = cart.__len__()
-        response = JsonResponse({"qty": cart_quantity})
-        return response
+        return JsonResponse({"상품": product_id})
