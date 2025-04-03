@@ -1,7 +1,8 @@
 from django.contrib import admin
+from .models import Category, Product
 
-from .models import Category, Probuct
 
 # Register your models here.
+# dev_3
 admin.site.register(Category)
-admin.site.register(Probuct)
+admin.site.register(Product)

@@ -1,6 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from cart.cart import Cart
-from store.models import Probuct
+from store.models import Product
 from django.http import JsonResponse
 
 
@@ -24,7 +24,7 @@ def add_cart(request):
         print("product_qty", product_qty)
 
         # DB에서 찾아서 product 객체로 변환
-        product = get_object_or_404(Probuct, id=product_id)
+        product = get_object_or_404(Product, id=product_id)
 
         # 세션에 저장
         cart.add(product, product_qty)

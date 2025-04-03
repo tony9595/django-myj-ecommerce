@@ -4,26 +4,26 @@
     {% include "layout/head.html" %}
 {% endblock %}
 {% block navi %}
-    {% include "layout/navibar.html" %}
+    {% include "layout/navbar.html" %}
     <div class="d-flex flex-column vh-100 justify-content-between">
-    {% endblock %}
+    {% endblock navi %}
     {% block header %}
         <header class="bg-dark py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Category</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">카테고리 페이지 입니다.</p>
+                    <h1 class="display-4 fw-bolder">카테고리</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Choose your Category Below..</p>
                 </div>
             </div>
         </header>
-    {% endblock %}
+    {% endblock header %}
     {% block content %}
         <div class="container">
             <div class="row">
                 <center>
-                    <div class="col-8 my-5">
-                        {% for category in categories %}
-                            <h3 class="my-3">
+                    <div class="col-8 mt-5">
+                        {% for category  in categories %}
+                            <h3>
                                 <a href="{% url 'store:category' category.id %}">{{ category.name }}</a>
                             </h3>
                         {% endfor %}
@@ -31,8 +31,8 @@
                 </center>
             </div>
         </div>
-    {% endblock %}
+    {% endblock content %}
     {% block footer %}
         {% include "layout/footer.html" %}
     </div>
-{% endblock %}
+{% endblock footer %}
