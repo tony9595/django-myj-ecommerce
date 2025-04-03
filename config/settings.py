@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.humanize",  # dev_5 쉼표(,)를 추가하여 통화 형식(₩1,000,000)으로 변환하는 방법
     "store",  # dev_1
     "accounts",
+    "cart",
 ]
 
 MIDDLEWARE = [
@@ -142,3 +143,5 @@ MEDIA_URL = "media/"  # ex) /media/photo1.png
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 AUTH_USER_MODEL = "accounts.User"
+
+CART_SESSION_ID = "cart"
