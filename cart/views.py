@@ -11,8 +11,6 @@ from django.http import JsonResponse
 def add_cart(request):
     cart = Cart(request)
 
-    print("카트======", cart)
-
     if request.POST.get("action") == "post":
 
         # 상품 받아오기
@@ -29,5 +27,9 @@ def add_cart(request):
         # 세션에 저장
         cart.add(product, product_qty)
 
-        # Get Cart Quantity
-        return JsonResponse({"상품": product_id})
+        # dev_16
+        # 카트 전체 개수 가져오기
+        cart_qty = cart.__len__()
+        response = JsonResponse({"qty": cart_qty})
+
+        return response
