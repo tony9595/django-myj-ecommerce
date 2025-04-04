@@ -20,7 +20,7 @@
     <div class="container">
         {% if cart %}
             {% for item in cart %}
-                <div class="card mb-3">
+                <div class="card my-3">
                     <div class="row g-0">
                         <div class="col-md-4">
                             <img src=" {{ item.product.image.url }}"
@@ -51,12 +51,12 @@
                         ID :&nbsp;{{ product.id }}
                         <br />
                                         &nbsp;${{ product.sale_price }} {% endcomment %}
-                                        ${{ item.product.price }}
+                                        {{ item.product.sale_price|floatformat:0|intcomma }} 원
                                         <br />
                                         ID :
                                         {{ item.product.id }}
                                     {% else %}
-                                        ${{ item.product.price }}
+                                        {{ item.product.price|floatformat:0|intcomma }} 원
                                         <br />
                                         ID :
                                         {{ item.product.id }}
@@ -90,3 +90,27 @@
 {% block footer %}
     {% include "layout/footer.html" %}
 {% endblock footer %}
+{% block script %}
+    <script>
+    $(document).on('click','#add-cart',function(e){
+        $.ajax({
+            type:"post",
+            url:"{% url 'cart:add_cart' %}",
+            data:{
+                product_id:$("#add-cart").val(),
+                product_qty: $("#inputQuantity").val(),
+                csrfmiddlewaretoken:'{{ csrf_token }}',
+                action:"post"
+            },
+            success:function(json){
+                console.log(json)
+                $('#cart_quantity').text(json.qty)
+                //location.reload()
+            },
+            error: function(e){
+                console.log(e)
+            }
+        });
+    });
+    </script>
+{% endblock %}
