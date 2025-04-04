@@ -32,4 +32,7 @@ def add_cart(request):
         cart_qty = cart.__len__()
         response = JsonResponse({"qty": cart_qty})
 
+        # 세션확인 테스트
+        cart.decrypt_all_sessions()
+
         return response
