@@ -44,7 +44,11 @@ def summary_cart(request):
     # 카트객체 받아오기
     cart = Cart(request)
 
-    return render(request, "cart/summary.html", {"cart": cart})
+    return render(
+        request,
+        "cart/summary.html",
+        {"cart": cart, "totals": cart.get_product_total},
+    )
 
 
 def delete_cart(request):
