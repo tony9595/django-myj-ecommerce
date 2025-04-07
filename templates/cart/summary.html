@@ -23,7 +23,7 @@
             {% if cart %}
                 {% comment %} item = {"quantity":7,"price":3000.00,"product": <Product : 상품1>, "total_price":21000 } {% endcomment %}
                 {% for item in cart %}
-                    <div class="card mt-3">
+                    <div class="card my-3">
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <img src=" {{ item.product.image.url }}"
@@ -68,14 +68,17 @@
                                         <br />
                                         <div class="row justify-content-center">
                                             <div class="col-md-2">Quantity</div>
-                                            <input type="text" value="{{ item.quantity }}" class="col-md-2">
+                                            <!--dev_20-->
+                                            <input type="text"
+                                                   id="input-{{ item.product.id }}"
+                                                   value="{{ item.quantity }}"
+                                                   class="col-md-2">
                                         </div>
                                         <br />
                                         <a href="{% url 'store:home' %}" class="btn btn-secondary">홈으로</a>
-                                        {% comment %} <button type="button"
-         value="{{product.id}}"
-         id="add-cart"
-         class="btn btn-secondary">Add to Cart</button> {% endcomment %}
+                                        {% comment %}
+                                        <button type="button" value="{{product.id}}" id="add-cart" class="btn btn-secondary">Add to Cart</button> 
+                                        {% endcomment %}
                                         <button type="button"
                                                 data-index="{{ item.product.id }}"
                                                 class="btn btn-secondary update-cart">업데이트</button>
@@ -100,6 +103,29 @@
 <!--dev_19-->
 {% block script %}
     <script>
+        // dev_20
+    $(document).on('click','.update-cart',function(e){
+        let productid = $(this).data("index")
+        let qty = $('#input-'+productid).val()
+
+        $.ajax({
+            type:"post",
+            url:"{% url 'cart:update_cart' %}",
+            data:{
+                product_id: $(this).data("index"),
+                product_qty : qty,
+                csrfmiddlewaretoken:'{{ csrf_token }}',
+                action:"update"
+            },
+            success:function(json){
+                console.log(json)
+                location.reload();                 
+            },
+            error: function(e){
+                console.log(e)
+            }
+        });
+    });
     $(document).on('click','.delete-product',function(e){
         $.ajax({
             type:"post",
