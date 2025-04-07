@@ -45,3 +45,17 @@ def summary_cart(request):
     cart = Cart(request)
 
     return render(request, "cart/summary.html", {"cart": cart})
+
+
+def delete_cart(request):
+
+    cart = Cart(request)
+
+    if request.POST.get("action") == "post":
+        product_id = int(request.POST.get("product_id"))
+
+        product = Product.objects.get(id=product_id)
+
+        cart.remove(product)
+
+        return JsonResponse({"삭제 상품": product_id})
