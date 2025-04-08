@@ -37,10 +37,16 @@ def login_user(request):
             current_user = User.objects.get(id=request.user.id)
             saved_cart = current_user.old_cart
 
+            cart = Cart(request)
+
+            if len(cart) > 0:
+                cart.cart_to_db()
+
             if saved_cart:
                 converted_cart = json.loads(saved_cart)
                 # add
-                cart = Cart(request)
+                # cart = Cart(request)
+                
                 for product_id, data in converted_cart.items():
                     quantity = data["quantity"]
                     print("상품 ID:", product_id)  # 1
