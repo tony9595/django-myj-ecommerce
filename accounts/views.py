@@ -1,9 +1,13 @@
+import json
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
 # from .forms import RegisterUserForm # 상대 경로형식
-from accounts.forms import RegisterUserForm  # 절대 경로 형식
+from accounts.forms import RegisterUserForm
+from accounts.models import User
+from cart.cart import Cart  # 절대 경로 형식
+from store.models import Product
 
 # Create your views here.
 
@@ -28,6 +32,22 @@ def login_user(request):
 
         if user is not None:
             login(request, user)
+
+            #dev_23
+            current_user = User.objects.get(id=request.user.id)
+            saved_cart = current_user.old_cart
+
+            if saved_cart:
+                converted_cart = json.loads(saved_cart)
+                # add
+                cart = Cart(request)
+                for product_id, data in converted_cart.items():
+                    quantity = data["quantity"]
+                    print("상품 ID:", product_id)  # 1
+                    print("수량:", quantity)  # 5
+                    product = Product.objects.get(id=product_id)
+                    cart.add(product, quantity)
+
             messages.success(request, "You Have been logged in")
             return redirect("/")
         else:
