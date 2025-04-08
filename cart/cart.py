@@ -15,7 +15,13 @@ class Cart:  # 카트 클래스 생성
     def __init__(self, request):  # 객체 생성시 request 객체를 받도록 함
 
         self.session = request.session  # session 객체를 Cart 객체에 변수로 저장
+        
+        #dev_23
+        # 로그인이 되어있다면, 로그인 유저에 대한 정보를 빼내기 위하여
+        self.request = request
+
         cart = self.session.get(settings.CART_SESSION_ID)
+
 
         if not cart:
             # session에 cart 객체가 없으면 session 객체에 cart 를 만듦
