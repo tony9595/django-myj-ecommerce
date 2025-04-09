@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "accounts",  # dev_9
     "cart",  # dev_15
     "orders", # dev_24
+    "payment", #dev_26
 ]
 
 MIDDLEWARE = [
@@ -67,7 +68,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                # dev_17 cart(requet)가 모든 템플릿ㅅ에서 사용 가능해짐.
+                # dev_17 cart(requet)가 모든 템플릿에서 사용 가능해짐.
                 "cart.context_processors.cart",
             ],
         },

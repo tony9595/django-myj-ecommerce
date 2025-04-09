@@ -8,7 +8,8 @@ urlpatterns = [
     path("", include("store.urls")),  # dev_1
     path("accounts/", include("accounts.urls")),  # dev_9
     path("cart/", include("cart.urls")),  # dev_15
-    path("orders/", include("orders.urls")), # dev_23
+    path("orders/", include("orders.urls")),  # dev_23
+    path("payment/", include("payment.urls")),  # dev_26
 ]
 
 # dev_2
