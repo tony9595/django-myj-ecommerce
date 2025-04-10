@@ -27,8 +27,10 @@ class OrderItem(models.Model):
         return self.price * self.quantity
     
 # dev_25
+
 class ShippingAddress(models.Model):
     user = models.ForeignKey("accounts.User",on_delete=models.CASCADE)
+    order = models.OneToOneField(Order, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=125)
     phone = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
