@@ -29,6 +29,8 @@ def payment_process(request):
                     quantity = item['quantity'],
                     price = item['price']
                 )
+
+                create_order_item.save()
             
             create_payment = Payment(orde = create_order)
             create_payment.imp_uid = request.POST["imp_uid"]
