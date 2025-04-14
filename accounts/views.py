@@ -88,3 +88,7 @@ def register_user(request):
         form = RegisterUserForm()
 
     return render(request, "accounts/register.html", {"form": form})
+
+# def_27
+def kakao_login_user(request):
+    return render(request,"accounts/kakao_login.html")
