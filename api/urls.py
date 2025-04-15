@@ -15,7 +15,11 @@ urlpatterns = [
     path("hello-world-json/", base_views.hello_world_json),
     path("hello-world-drf/", base_views.hello_world_drf),
     # dev_29
-    # 방식    url       기능
-    # GET  products/    list
+    # 방식     url           기능
+    # GET    products/       list
+    # POST   products/       create
+    # GET    product/{id}    create
+    # DELETE product/{id}   delete product
     path("products/", product_views.products_api),
+    path("product/<int:pk>/", product_views.product_api),
 ]
