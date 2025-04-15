@@ -1,17 +1,21 @@
 from rest_framework import serializers
-from store.models import Category
+from store.models import Category, Product
 
 
-class ProductSerializer(serializers.Serializer):
-    id = serializers.IntegerField()
-    name = serializers.CharField(max_length=100)
-    price = serializers.ImageField()
-    category = serializers.PrimaryKeyRelatedField(queryset=Category.objcet.all())
-    description = serializers.CharField(
-        max_length=250, required=False, allow_blank=True, allow_null=True
-    )
-    created_at = serializers.DateField()
-    updated_at = serializers.DateField()
-    is_sale = serializers.BooleanField()
-    sale_price = serializers.IntegerField()
+# class ProductSerializer(serializers.Serializer):
+#     id = serializers.IntegerField()
+#     name = serializers.CharField(max_length=100)
+#     price = serializers.ImageField()
+#     category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all())
+#     description = serializers.CharField(
+#         max_length=250, required=False, allow_blank=True, allow_null=True
+#     )
+#     image = serializers.ImageField()
+#     is_sale = serializers.BooleanField()
+#     sale_price = serializers.IntegerField()
 
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        #fields = "__all__"
+        fields = ["id","name","category"]
