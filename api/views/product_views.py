@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from store.models import Product
+from store.models import Category, Product
 from api.serializers import ProductSerializer
 
 
@@ -16,13 +16,32 @@ def products_api(request):
         return Response(serializer.data)
 
     # 디시리얼라이져
-    if request.method == "POST":
-        print(request.data)
-        print("타입 : ", type(request.data))
-        serializer = ProductSerializer(data=request.data)
+    # if request.method == "POST":
+    #     print(request.data)
+    #     print("타입 : ", type(request.data))
+    #     serializer = ProductSerializer(data=request.data)
 
+    #     serializer.is_valid(raise_exception=True)
+    #     serializer.save()
+
+    #     return Response(serializer.data)
+
+    # dev_33
+    if request.method == "POST":
+
+        # requset.data 는 기본적으로 불변임
+        data = request.data.copy()
+        category_data = data.pop("category")
+        category_data = request.data["category"]
+
+        if isinstance(category_data, list):
+            category_data = category_data[0]
+
+        category, _ = Category.objects.get_or_create(**category_data)
+
+        serializer = ProductSerializer(data=data)
         serializer.is_valid(raise_exception=True)
-        serializer.save()
+        serializer.save(category=category)
 
         return Response(serializer.data)
 
