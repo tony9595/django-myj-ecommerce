@@ -11,9 +11,9 @@ from .views import base_views, product_views, category_views
 app_name = "api"
 
 urlpatterns = [
-    path("hello-world/", base_views.hello_world),
-    path("hello-world-json/", base_views.hello_world_json),
-    path("hello-world-drf/", base_views.hello_world_drf),
+    # path("hello-world/", base_views.hello_world),
+    # path("hello-world-json/", base_views.hello_world_json),
+    # path("hello-world-drf/", base_views.hello_world_drf),
     # dev_29
     # 방식     url           기능
     # GET    products/       list
