@@ -3,8 +3,8 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-#from api.views import hello_world_drf,hello_world,hello_world_json
-from .views import base_views, product_views 
+# from api.views import hello_world_drf,hello_world,hello_world_json
+from .views import base_views, product_views, category_views
 
 
 # dev_28
@@ -23,4 +23,8 @@ urlpatterns = [
     # DELETE product/{id}   delete product
     path("products/", product_views.products_api),
     path("product/<int:pk>/", product_views.product_api),
+    # dev_32
+    # 방식   url                  기능
+    # GET  categories/            list
+    path("categories/", category_views.categories_api),
 ]

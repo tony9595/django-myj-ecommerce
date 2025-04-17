@@ -1,7 +1,15 @@
 from rest_framework import serializers
 from store.models import Category, Product
 
+# 2. Serilaizer 객체의 주요 기능
+# 1) serialization
+# 2) deserialiaztion
+# 3) validation
+# 4) request / response 데이터 핸들링 ( to_internal_value() / to_representation() )
+# 5) nested serialization
 
+
+# dev_29
 # class ProductSerializer(serializers.Serializer):
 #     id = serializers.IntegerField()
 #     name = serializers.CharField(max_length=100)
@@ -15,17 +23,33 @@ from store.models import Category, Product
 #     sale_price = serializers.IntegerField()
 
 
+class CategorySerializer(serializers.ModelSerializer):
+    # dev_32 역방향 참조
+    # products = ProductSerializer(many=True, read_only=True)  # related_name=products
+
+    class Meta:
+        model = Category
+        fields = "__all__"
+
+
 class ProductSerializer(serializers.ModelSerializer):
+    category = CategorySerializer(read_only=True)
+
     class Meta:
         model = Product
         fields = "__all__"
-        # fields = ["id","name","category"]
+        # fields = ["id", "name", "category"]
+        # dev_32 ForeignKey 필드 자동 직렬화
+        # ForeignKey에 해당 되는 모델을 시리얼라이즈로 만들필요 없이 자동으로 직렬화(json) 해줌
+        # 단점: depth 가 깊어 지면 속도에 문제가 생김
+        # 기본적으로 read_only 임
+        # depth = 1
 
-    # dev_31
-    # 가격은 0 이상 10,000 이하
-    def validate_price(self, value):
-        if value < 0:
-            raise serializers.ValidationError("가격은 0 이상으로 설정해주세요.")
+    def create(self, validated_data):
+        category_data = validated_data.pop("category")
 
-        if value > 10000:
-            raise serializers.ValidationError("가격은 10만원 이하로 설정해주세요.")
+        # 카테고리 저장/조회
+        category,_ = Category.objects.get_or_create(**category_data)
+        product = Product.objects.create(**validated_data, category=category)
+
+        return product
