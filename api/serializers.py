@@ -22,18 +22,16 @@ from store.models import Category, Product
 #     is_sale = serializers.BooleanField()
 #     sale_price = serializers.IntegerField()
 
-
 class CategorySerializer(serializers.ModelSerializer):
     # dev_32 역방향 참조
-    # products = ProductSerializer(many=True, read_only=True)  # related_name=products
+    #products = ProductSerializer(many=True, read_only=True)  # related_name=products
 
     class Meta:
         model = Category
         fields = "__all__"
 
-
 class ProductSerializer(serializers.ModelSerializer):
-    category = CategorySerializer(read_only=True)
+    category = CategorySerializer()
 
     class Meta:
         model = Product
@@ -53,3 +51,5 @@ class ProductSerializer(serializers.ModelSerializer):
         product = Product.objects.create(**validated_data, category=category)
 
         return product
+
+
