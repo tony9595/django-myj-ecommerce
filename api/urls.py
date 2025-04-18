@@ -24,9 +24,16 @@ urlpatterns = [
     path("products/", product_views.products_api),
     path("product/<int:pk>/", product_views.product_api),
     # dev_32
+    # dev_35
     # 방식   url                  기능
     # GET  categories/            list
-    # path("categories/", category_views.categories_api),
-    # dev_35
-    path("categories/", category_views.CategoriesAPI.as_view()),
+    # POST categories/            create
+    # Get  categories/{id}         product
+    # PUT  categories/{id}       modify product
+    # DELETE  categories/{id}    delete product
+    # path("categories/", category_views.CategoriesAPI.as_view()),
+    # path("category/<int:pk>/", category_views.CategoryAPI.as_view()),
+    # dev_36
+    path("categories/", category_views.CategoriesMixins.as_view()),
+    path("category/<int:pk>/", category_views.CategoryMixins.as_view()),
 ]
