@@ -26,5 +26,7 @@ urlpatterns = [
     # dev_32
     # 방식   url                  기능
     # GET  categories/            list
-    path("categories/", category_views.categories_api),
+    # path("categories/", category_views.categories_api),
+    # dev_35
+    path("categories/", category_views.CategoriesAPI.as_view()),
 ]

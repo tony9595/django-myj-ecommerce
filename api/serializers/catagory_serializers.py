@@ -1,4 +1,3 @@
-
 from rest_framework import serializers
 from store.models import Category, Product
 from api.serializers.product_serializers import ProductSimpleSerializer
@@ -13,7 +12,7 @@ class CategorySimpleSerializer(serializers.ModelSerializer):
 
 class CategorySerializer(serializers.ModelSerializer):
 
-    Products = ProductSimpleSerializer(many=True)
+    products = ProductSimpleSerializer(many=True)
 
     class Meta:
         model = Category
