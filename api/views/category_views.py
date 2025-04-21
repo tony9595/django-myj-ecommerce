@@ -93,6 +93,7 @@ class CategoriesMixins(ListModelMixin, CreateModelMixin, GenericAPIView):
 class CategoryMixins(RetrieveModelMixin, UpdateModelMixin , DestroyModelMixin, GenericAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySimpleSerializer
+    lookup_field = "name"
 
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
